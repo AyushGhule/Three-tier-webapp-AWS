@@ -24,6 +24,9 @@ Parameters:
     Type: String
     Default: 't3.small'
     Description: EC2 instance type.
+  KeyPairName:
+    Type: AWS::EC2::KeyPair::firstkey 
+    Description: key required for ssh.
   UseSsmAmi:
     Type: String
     AllowedValues: ['true', 'false']
@@ -31,7 +34,7 @@ Parameters:
     Description: Set to 'true' to use the latest Amazon Linux 2023 AMI via SSM instead of CustomAmiId.
   CustomAmiId:
     Type: String
-    Default: 'ami-00ca570c1b6d79f36'
+    Default: 'ami-0ff5003538b60d5ec'
     Description: Specific AMI ID to use (must exist in the target region).
   # Region-safe AL2023 AMI via SSM (used when UseSsmAmi = true)
   Al2023AmiParameter:
@@ -177,6 +180,7 @@ Resources:
     Properties:
       InstanceType: !Ref InstanceType
       ImageId: !If [ UseSsmAmiCond, !Ref Al2023AmiParameter, !Ref CustomAmiId ]
+      KeyName: !Ref firstkey
       SubnetId: !Ref Subnet1
       SecurityGroupIds:
         - !Ref InstanceSecurityGroup

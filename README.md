@@ -50,7 +50,7 @@ User → Web Server → PHP Backend → RDS Database
 - Frontend: HTML, CSS
 - Backend: PHP
 - Database: MySQL
-- Web Server: Apache
+- Web Server: Nginx
 - Cloud: AWS
 - IaC Tool: CloudFormation
 
